@@ -1,0 +1,335 @@
+\documentclass{assignment}
+\coursetitle{Randomized Algorithms}
+\courselabel{CSE 648}
+\exercisesheet{Assignment 4}{}
+\student{Abhimanyu M A \textbf{(11111002)}  Sumesh T A \textbf{(11111065)}}
+\semester{Summer 2011}
+\date{November 14, 2011}
+\university {IIT Kanpur}
+\school{Department of Computer Science and Engineering}
+%\usepackage[pdftex]{graphicx}
+%\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\newtheorem{lemma}{Lemma}
+\usepackage{fullpage}
+\begin{document}
+
+\begin{problemlist}
+\pbitem
+\begin{problem}
+ \textbf{Method of Bounded Difference}
+\begin{enumerate}
+ \item Rumour Spreading
+ \item Triangles in a Random Graph 
+\end{enumerate}
+ 
+\begin{answer}
+\begin{enumerate}
+ \item \textbf{Rumour Spreading} \\
+We have to look at the first stage where $< \frac{n}{2}$ people know the rumour, let us assume that the people are in some way ordered $P_1,P_2,P_3,\ldots P_n$ let the first $i$ people be the persons knowing rumours, we are now guaranteed that the persons from $P_{n/2+1},\ldots P_n$ doesn't know the rumour, we now omit everything and check only how many people will know the rumour here. The process for rumour spreading is as follows, in each step a person from $P_1, \ldots P_i$ picks a random person and tells him the rumours, we shall now first say the following thing,\\
+\begin{lemma}
+On expectation, atleast half the people in $1,...i$ will pick people from the set  $P_{n/2+1},\ldots P_n$
+\end{lemma}
+Now consider the random experiment as follows we toss $i/2$ balls into $n/2$ bins , and all we need to find is the expected number of non-empty bins \\
+We shall now define the following random variable \\
+$X$ = Number of bins with atleast 1 ball \\
+We can define 
+\[
+ X_i =  
+\begin{cases}
+ 1 & \text{if bin $i$ has atleast one ball}\\
+ 0 & \text{otherwise}
+\end{cases}
+\]
+Let $I=i/2$ and $N=n/2$
+We can see that $X_i= $ Probability that the bin is not empty
+\begin{eqnarray}
+ X_i&=& 1- \left( 1- {1 \over N} \right)^I \\
+ X_i&=& 1- e^{-I/N} 
+\end{eqnarray}
+
+Now we can see that \\
+\begin{eqnarray}
+ E[X] &=& N-Ne^{-I/N} \\
+E[X] &\geq& N(\frac{I}{N}-\frac{I^2}{2N^2})\\
+E[X] &\geq& I-{I^2 \over 2N}\\
+E[X] &\geq& I\left(1-{I \over 2N}\right)\\
+E[X] &\geq& \left(i \over 2\right) \left( 1 - {i \over 2n} \right) \\
+\end{eqnarray}
+Since $i\leq \frac{n}{2}$\\
+\begin{eqnarray}
+E[X] &\geq& \left(3i \over 8\right) \\
+\end{eqnarray}
+Note that we already have $i$ knowing nodes, hence the total is $\geq (1+\frac{3}{8})i$ which proves that it increases with a constant factor.\\
+Now we can easily apply MOBD on this since $|E[X_A] - E[X_{A'}]| \leq 1$  this satisfies the Lipschitz Condition and hence we can bound 
+\begin{eqnarray}
+ Pr[|X-E[X]|>(11/32)i] \leq exp \left( { - 121 i^2 \over 1024 n} \right)
+\end{eqnarray}
+ \item  \textbf{Triangles in a Random Graph}\\Let the grah formed be $G(V,E)$ We shall define $X_i$ as follows 
+\[
+ X_{ijk} =  
+\begin{cases}
+ 1 & \text{if} (i,j) (j,k) (k,i) \in E \\
+ 0 & \text{otherwise}
+\end{cases}
+\]
+\begin{enumerate}
+\item We can now see that $X = \sum X_{ijk}$ over all distinct triplets $\{i,j,k\}$. We can now by linearity of expectation say that given
+\begin{eqnarray}
+E[X_{ijk}] & = & P[X_{ijk} = 1] \\
+ & = & p^3
+\end{eqnarray}
+we have
+\begin{eqnarray}
+ E[X] & = & \sum E[X_{ijk}] \text{ over all $i,j,k$ } \\
+ & = & \binom{n}{3} p^3
+\end{eqnarray}
+To find $E[X^2]$ we shall examine $X$.
+\begin{eqnarray}
+ X & = & (X_1 + X_2 + \ldots X_k) \\
+& & \text{Where $k=\binom{n}{3}$} \nonumber \\
+X^2 & = & (X_1 + X_2 + \ldots X_k)^2 \\
+& = & \sum X_i \cdot X_j \\
+& & \text{Over all $i,j$ pairs} \nonumber
+\end{eqnarray}
+We shall now see that $X_i$ and $X_j$ are not independent, since they could share vertices, we could have them sharing $0,1,2$ or $3$ vertices. 
+\begin{eqnarray}
+E[X^2] & = &  \sum (E[X_i \cdot X_j]) \\
+& = & \binom{n}{3} p^3 ( \binom{n-3}{3} p^3 + 3 \binom{n-3}{2} p^2 + 3(n-3)p + 1) \\
+\end{eqnarray}
+This indendence itself is the reason why we can't apply Chernoff Bound, since they are dependent when the share the vertices. 
+\item Chebyshev's Inequality states that given some random variable $X$ with expected value $\mu$ and variance $\sigma^2$ we have
+\begin{equation}
+Pr( |X-\mu| > k\sigma ) \leq \frac{1}{k^2}
+\end{equation} 
+We also now that 
+\begin{eqnarray}
+ \sigma^2 & = & E[X^2] - E[X]^2 \\
+ & =  & \binom{n}{3} p^3 ( \binom{n-3}{3} p^3 + 3 \binom{n-3}{2} p^2 + 3(n-3)p + 1 - \binom{n}{3}p^3) \\
+& \leq & \binom{n}{3} p^3 ( \binom{n}{3} p^3 + 3 \binom{n}{2} p^2 + 3(n)p + 1 - \binom{n}{3}p^3)\\
+& \leq &  \binom{n}{3} p^3 (\frac{3}{2}n^2p^2 + 3np + 1) \\
+& \leq & n^5 
+\end{eqnarray}
+In this case we get 
+\begin{eqnarray}
+\sigma \leq  n^\frac{5}{2} 
+\end{eqnarray}
+For some constant $c$ \\
+Since we have a bound on $\sigma$ we can apply Chebyshev's Inequality
+\begin{eqnarray}
+ Pr (X > 5/4 E[X]) & = & Pr(|X-E[X]|> 1/4 E[X]])
+\end{eqnarray}
+From the above equations we can get $E[X] = c' \cdot n^{\frac{1}{2}} \cdot \sigma$ which if substituted we get
+\begin{eqnarray}
+Pr(|X-E[X]|> c'' \cdot n^{\frac{1}{2}} \cdot \sigma) \leq \frac{1}{c'' n}
+\end{eqnarray}
+This gives us a inverse linear probability ratio. 
+\item We shall now use Method of Bounded Difference to prove the bounds. Since $X = X_i$ and we need to bound $X>\alpha E[X]$ we can see that our required function is the sum function, since $X_i = {0,1}$. We have for any two $X'$ and $X''$ seperated only by a single $X_i$ $|X''-X'|\leq 1$ this satisfies the Lipschitz Condition and hence we can bound 
+\begin{eqnarray}
+ Pr (X > 5/4 E[X]) & = & Pr(|X-E[X]|> 1/4 E[X]]) \\
+Pr(|X-E[X]|> 1/4 E[X]]) & \leq & exp \left({-E[X]^2 \over 32 \binom{n}{3} } \right) \\
+& \leq & exp \left( {-p^6 \binom{n}{3} \over 32 } \right)
+\end{eqnarray}
+We can see that for any value of $p$ there will exists some point where MOBD will give a much better result than Chebyshev's inequality. 
+\end{enumerate}
+\end{enumerate}
+
+\end{answer}
+\end{problem}
+\pbitem
+\begin{problem}
+ \textbf{Principle of deffered decision}
+\begin{answer}
+First we shall use the following basic probability lemmas we will use throughout the question without proof
+\begin{lemma}
+ If we select $l$ numbers randomly uniformly distributed in the range $(0,1)$ then the expected value of the smallest no. (length of the leftmost interval) is $\frac{1}{l+1}$
+\end{lemma}
+
+\begin{lemma}
+ If there are $l$ random variables uniformly distributed in the range $(\delta,1)$ then the expected value of the smallest no. is $\delta + \frac{1}{l+1}$
+\end{lemma}
+
+We define our random variable $X=\sum Xi$ where $X_i$ is the $i^{th}$ edge added to the Kruskal Algorithm. \\
+We are given a complete graph $K_n$ with random edge weights put uniformly, randomly , independently in the range $(0,1)$. The algorithm is as follows, we sort the edges, and keep on selecting the lowest weight edge that does not cause a cycle. 
+If we define $X_i$ to be the weight of the $i^{th}$ edge that is selected then we can see that
+\begin{eqnarray}
+ X=\sum_{i=1}^{n-1} (X_i) 
+\end{eqnarray}
+ We can apply linearity of expectation on this and obtain
+\begin{eqnarray}
+ E[X]=\sum_{i=1}^{n-1} E[(X_i)] 
+\end{eqnarray}
+Clearly $X_1={1 \over \binom{n}{2} + 1}$
+We will uncover the weight of the vertices only when we need to consider that we are going to insert the $(i+1)^{th}$ vertex we can see that the Kruskal forest till now will be a set of isolated vertices and few connected trees. Let $\beta_1, \beta_2, \ldots \beta_{n-i}$ and also that $1 \leq \beta_i \leq i$ be the number of vertices in each of the componenets then we can see that the total number of edges from which the connecting edge can be selected is 
+\begin{eqnarray}
+ l_{i+1} = \binom{n}{2} - \sum_{i=1}^{n-i} \binom{\beta_i}{2}  
+\end{eqnarray}
+Since this many points remain the expected value of 
+\begin{eqnarray}
+E[X_{i+1}] = E[X_i] + { 1 \over l_{i+1} +1 }   
+\end{eqnarray}
+Since we need to get a $E[X_{i+1}] \leq f(i+1) $ we need to find the minimum possible value of $l_{i+1}$ which is obtained when $\beta_1 = i$ and rest all $\beta_i=1$ that means all the edges form a single connected component and the rest as single vertices, hence 
+\begin{eqnarray}
+ l_{i+1} \geq \binom{n}{2} - \binom{i}{2}
+\end{eqnarray}
+\begin{eqnarray}
+E[X_{i+1}] \leq  E[X_i] + { 2 \over n(n-1) - i(i-1)  }   \\
+E[X_{i+1}] \leq  E[X_i] + { 2 \over (n-1)^2 - (i-1)^2}  
+\end{eqnarray}
+If we let $N=n-1$ and $I=i-1$ we get
+\begin{eqnarray}
+E[X_{i+1}] \leq  E[X_i] + { 2 \over N^2 - I^2}\\
+ E[X_{i+1}] \leq E[X_i] + \frac{1}{N} \left( {  1 \over N - I } + {1 \over N+I} \right)
+\end{eqnarray}
+expanding we get 
+\begin{eqnarray}
+E[X_{i+1}] \leq \frac{1}{N} \sum_{I=0}^{i} \left( {  1 \over N - I } + {1 \over N+I} \right) \\
+E[X_{i+1}] \leq \frac{1}{n} log \left( {n \over n-i} \right)
+\end{eqnarray}
+
+Now we move on to analysing $E[X]$
+\begin{eqnarray}
+E[X] \leq \sum_{i=1}^{n-i} \frac{1}{n} log \left( {n \over n-i} \right)\\
+E[X] \leq \frac{1}{n} \sum_{i=1}^{n-i} log \left( {n \over n-i} \right) \\
+E[X] \leq \frac{1}{n} log  \left( \prod_{i=1}^{n} {n \over n-i} \right) \\
+E[X] \leq \frac{1}{n} log  \left(  {n^{n-1} \over (n-1)!} \right) 
+\end{eqnarray}
+When can now approximate using Sterling's Approximation $n!= c \sqrt{n} \left(\frac{n}{e}\right)^n$ 
+\begin{eqnarray}
+E[X] \leq \frac{1}{n} log \left( e^n \over c\sqrt{n} \right)  \\
+E[X] \leq \frac{1}{n} \left(n - log (c \sqrt(n))\right) 
+\end{eqnarray}
+Since $c \sqrt(n) > 1$
+\begin{eqnarray}
+E[X] \leq \frac{1}{n} \left(n \right) \\
+E[X] = O(1)
+\end{eqnarray}
+
+\end{answer}
+
+\end{problem}
+
+\pbitem
+\begin{problem}
+\textbf{Delay Sequences} \\
+\begin{enumerate}
+\item Reaching $log n$ in $O(log n)$ steps with $d=2$ $b=1$
+\item Find the time to reach $n$ with $d$ neighbours and $b$ option of relaxation
+\end{enumerate}
+\begin{answer}
+\begin{enumerate}
+ \item We can first construct a delay sequence the model the problem, if any of the counter took time $m$ to reach the value of $log(n)$ then we can see taht we would get a delay sequence as a ``witness'' to the ``delay'' of the counter, As exlained in class we shall now construct a possible delay sequence. 
+\begin{center}
+\begin{tabular}{l|c|c|l|l}
+Round & Counter & Outcome of Toss & Value at Beginning & Value at End\\
+\hline
+m & C & H & (log n)-1 & log n\\
+m-1 & C & T & (log n)-1 & (log n)-1\\
+m-2 & C & H & (log n)-1 & (log n)-1 \\
+m-3 & C`& T & (log n)-2 & (log n)-2 \\
+m-4 & C`& H & (log n)-3 & (log n)-2 \\
+m-5 & C`& H & (log n)-3 & (log n)-3 \\
+m-6 & C``& H & (log n)-5 & (log n)-4 
+\end{tabular}
+\end{center}
+
+We shall now look at the probability of a existence of a delay sequence of this length. the points to be noted are \\
+\begin{enumerate}
+\item If we get a Head(H) either we reach a previous state of lower value, or move to a counter with lower value hence the number of Heads(H) cannot be more than $log n$. 
+\item Each coin toss is random and independent.
+\end{enumerate}
+
+We can now see that 
+\begin{eqnarray}
+\text{ Pr[The Counter takes $m$ steps]}& = &\text{ Pr [Existence of a $m$ long delay sequence]} \\
+\text{Pr [Existence of a $m$ long delay sequence]} & = & \text{Pr[Single $m$ long delay sequence]} \times \text{Pr[Number of $m$ long delay sequence]} 
+\end{eqnarray}
+We shall first see that each delay sequence is obtained by a random coin toss, and the probability of a delay sequence 
+
+\begin{eqnarray}
+\text{Pr[Single $m$ long delay sequence]} = 2^{-m}
+\end{eqnarray}
+We know that we have exactly $log n$ Heads in the whole delay sequence and in total $m$, so we can first pick the points at which we get a head, which is  = $\binom{m}{log n}$. Now at each point we get a head we have three choices either to shift to any of it's neighbours or to shift one down, hence total options = $3^{log n}$ . We are now free to decide the starting point and the vertex from which we start each of which gives a $log n$ option. 
+\begin{eqnarray}
+\text{Pr[Number of  $m$ long delay sequence]} = (log n)^2 \cdot 3^{log n} \cdot \binom {m}{log n}
+\end{eqnarray}
+
+So 
+\begin{eqnarray}
+\text{ Pr[The Counter takes $m$ steps]}& = & (log n)^2 \cdot 3^{log n} \cdot \binom {m}{log n} \cdot 2^{-m}
+\end{eqnarray}
+
+To prove that $m$ is $O(log n)$ we will substitute that value for $m$ and see
+
+\begin{eqnarray}
+\text{ Pr[Algo takes $c log n$ steps]}& = & (log n)^2 \cdot 3^{log n} \cdot \binom {c log n}{log n} \cdot 2^{-c log n } \\
+& \leq & (log n)^2 \cdot 3^{log n} \cdot (ce)^{log n} \cdot 2^{-c log n } \\
+& \leq & (log n)^2 \cdot n^{log 3} \cdot n^{1+log c} \cdot n^{-c\cdot log 2} \\
+& \leq & (log n)^2 \cdot n^{log \frac{3ec}{2c}}\\ 
+\end{eqnarray}
+In the asymptotic case we need not bother about the $(log n)^2$ factor since $n^{2}$ will be much higher and hence $\frac{(log n)^2}{n^2}$ will be very less. 
+So now to say this with high probability all we need is the value for which
+\begin{eqnarray}
+log \left( { 3e \over c} \right) & \leq & -2 \\
+{3e \over c} & \leq & e^{-2} \\
+{1 \over c} & \leq & {e^{-3} \over 3} \\
+c & \geq & {3e^3} 
+\end{eqnarray}
+ 
+Hence we get the probability that the counter set will take more than $3e^3$ steps to reach $log n$ is $\leq {1 \over n^2}$ hence since $3e^3$ is a constant we can say that it will reach $log n$ in $O(log n)$ steps with w.h.p
+
+\item We can see that the same delay sequence with certain modification can apply here, 
+
+\begin{center}
+\begin{tabular}{l|c|c|l|l}
+Round & Counter & Outcome of Toss & Value at Beginning & Value at End\\
+\hline
+m & C & H & n-1 & log n\\
+m-1 & C & T & n-1 &  n-1\\
+m-2 & C & H & n-1 &  n-1 \\
+m-3 & C`& T & n-1-b & n-1-b \\
+m-4 & C`& H & n-2-b & n-1-b \\
+m-5 & C`& H &  n-2-b & n-2-2b \\
+m-6 & C``& H & n-3-3b & n-2-3b 
+\end{tabular}
+\end{center}
+
+Here we just carry forward all the arguments we made for the other, and we can see that the probability for existence of a tree is also the same, but what has changed is the number of ways it can branch. \\
+Option of branching into $d+1$ counters but is not available at every counter, that is possible at only $\frac{n}{b}$ places since after each of such branching the value reduces by $b$ . We are not really sure about the $+1$ but since we are overestimating it is accetable. Now it can also be seen that the maximum number of heads is $n$ and in which we can choose branchings. 
+\begin{eqnarray}
+\text{Number of ways to branch} =  \binom {n}{n/b} (1+d)^{n/b}
+\end{eqnarray}
+
+So putting all the rest of the terms that have not changed we get. 
+\begin{eqnarray}
+\text{ Pr[The Counter takes $m$ steps]}& = & n^2 \cdot \binom{n}{n/b} \cdot (1+d)^{n/b} \cdot \binom {m}{n} \cdot 2^{-m} \\
+\text{ Pr[The Counter takes $m$ steps]}& = & n^2 \cdot (be)^{n/b} \cdot (1+d)^{n/b} \cdot \left({me \over n}\right)^{n} \cdot 2^{-m} \\
+\end{eqnarray}
+We now look at $m=Cn/b=cn$
+\begin{eqnarray}
+Pr & = & n^2 \cdot (be)^{n/b} \cdot (1+d)^{n/b} \cdot \left({Ce \over b}\right)^{Cn/b} \cdot 2^{-Cnb} \\
+Pr & =& n^2 \cdot (beD(Ceb)^C)^{n/b} \cdot 2^{-Cnb} \\
+Pr & = & n^2 \cdot 2^{((n/b)(log(beD) + Clog(Ceb) )) - Cnb} 
+\end{eqnarray}
+To get a good bound we will set $Pr = n^2 \cdot 2^{-n}$ we will not bother about $n^2$ since asymptotically this value will decrease rapidly. Hence 
+\begin{eqnarray}
+(n/b)(log(beD) + Clog(Ceb) ) - Cnb &\leq& -n \\
+log(beD) + Clog(Ceb) &\leq& (Cb-1)b \\
+log(beD) + Clog(Ceb) &\leq& Cb^2 \\
+C(b^2 - log (Ceb)) &\geq& log (beD) \\
+Cb^2  &\geq& logb + 1 + logD \\
+C &\geq& 2+logD
+\end{eqnarray}
+Hence if $C \geq 3+\frac{log d}{b}$ satisfies the equation, hence for a given graph it is a constant. 
+
+
+
+\end{enumerate}
+
+\end{answer}
+\end{problem}
+\end{problemlist}
+\end{document}
+
+
