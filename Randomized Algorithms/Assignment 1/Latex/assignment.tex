@@ -1,0 +1,339 @@
+\documentclass{assignment}
+
+\coursetitle{Randomized Algorithms}
+\courselabel{CS 648}
+\exercisesheet{Assignment 1}{}
+\student{Abhimanyu M A \textbf{(1111002)} , Sumesh T A \textbf{(1111065)}}
+\semester{Summer 2011}
+\date{August 29, 2011}
+\university {IIT Kanpur}
+\school{Department of Computer Science and Engineering}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{xyling}
+\usepackage{amsthm}
+
+%\usepackage[pdftex]{graphicx}
+
+
+\begin{document}
+\begin{problemlist}
+\pbitem
+\begin{problem} 
+\textbf{Analysis of number of comparisons in Random Quick Select}
+\begin{answer}
+We shall first prove that the expected number of comparisons is less than $4n$. 
+
+\newtheorem{lemsplit}{Lemma}
+\begin{lemsplit}
+Given a $x$ randomly selected from $S$, the expected size of the larger set among $S_{<x}$ and $S_{>x}$ is $\frac{3|S|}{4}$
+\end{lemsplit}
+\begin{proof}
+Now let us look at the smaller set, the size of the smaller set can vary anywhere from $0$ to $\frac{|S|}{2}$, since $x$ is taken uniformly at random 
+\begin{equation}
+ E [ \textrm{|Smaller Set|}]=\frac{|S|}{4}
+\end{equation}
+This gives us that the expected size of the larger set is 
+\begin{equation}
+ E [ \textrm{|Larger Set|}]=\frac{3|S|}{4}
+\end{equation}
+\end{proof}
+Now consider the first $x$ chosen it will have to make $|S|$ comparisons, and finally it will be splitting the set $S$ into two and we can see that we will be discarding at least one of them. To ensure that we get the worst case expected probability we assume that the smaller set is discarded and hence the size of the instance now reduces to $\frac{3|S|}{4}$ . Now taking this as the set the same step is repeated hence.
+\begin{equation}
+ E [ \textrm{Number of comparisons}] \leq |S| + \frac{3|S|}{4} + \left(\frac{3|S|}{4} \right)^2 + \ldots
+\end{equation}
+This is an infinite geometric series with $r=\frac{3}{4}$, and hence taking $|S|=n$ we get. 
+\begin{equation}
+Sum = \frac{n}{1-\frac{3}{4}} = 4n
+\end{equation}
+Hence 
+\begin{equation}
+ E [ \textrm{Number of comparisons}] \leq 4n
+\end{equation}
+$ $ \\
+
+
+
+
+
+\end{answer}
+
+
+\end{problem}
+
+\pbitem
+\begin{problem}
+\textbf{Candidate Selection Problem}
+\begin{answer}
+
+We shall do this problem by careful application of partition theorem. Now we need to find the probability of Professor Dixon hiring the best qualified candidate. 
+\begin{eqnarray}
+ P[\varepsilon ] \\ 
+\textrm{ Where } \varepsilon \textrm{ is the event that the most eligible candidate is hired} \nonumber
+\end{eqnarray}
+Since computing this value will be very hard we shall apply partitioning on it. We consider the event $X_i$ where the best candidate is hired provided that he is at position $i$. \\
+It is easy to see that since the best candidate can occur in any position from $1$ to $n$ with equal probability(since we have assumed that the applicants appear in a uniformly random order) \\
+If we denote 
+\begin{equation}
+ p_i=Pr[X_i]
+\end{equation}
+then we can see that 
+\begin{equation}
+  P[\varepsilon ] = \frac{1}{n} \sum_{i=1}^{n} p_i
+\end{equation}
+We shall now construct a qualification array $A$ where $A_i =$ number of people behind him + 1. It is easy to see that for the best qualified candidate $A[i]=n$. \\
+Since Professor Dixon rejects all candidates appearing in positions from $1$ to $k$. We can see that 
+\begin{equation}
+ p_i = 0 \forall i = [1 \ldots k]
+\end{equation}
+Now we shall assume the case of $i>k$. 
+
+
+\newtheorem{lem}{Lemma}
+\begin{lem}
+The best candidate at $i^{th}$ position is hired iff the maximum element of $A[1 \ldots i-1]$ is at a position $\leq k$.  
+\end{lem}
+\begin{proof}
+If the maximum element of $A[1 \ldots i-1]$ is at a position $\leq k$, then no person from $k+1$ to $i-1$ will be better qualified than the most qualified person from $1$ to $k$. \\
+Now if the maximum element of  $A[1 \ldots i-1]$ is at a position $> k$, then either that person will be hired, or some other person from the $(k+1)^{th}$ to this person will be hired, and hence the person at $i^{th}$ position won't be hired. 
+\end{proof}
+
+We can now define $p_i$ as the probability that the best qualified person in $A[1 \ldots (i-1)]$ appears from $1$ to $k$. Since all permutations of $n-1$ persons are possible in the $i-1$ positions. 
+\begin{equation}
+ Pr[\textrm{Maximum of A[1...(i-1)] is from i to k]}] = \frac{k}{i-1}
+\end{equation}
+Hence we can see that 
+\begin{equation}
+ p_i=\frac{k}{i-1}
+\end{equation}
+Now we can express $P[\varepsilon]$
+\begin{equation}
+ P[\varepsilon] = \frac{1}{n} \sum_{i=1}^{n} p_i = \frac{1}{n} \left( \sum_{i=1}^{k} 0 + \sum_{i=k+1}^{n} \frac{k}{i-1} \right)
+\end{equation}
+Now we can take $k$ outside, and we get 
+\begin{equation}
+ P[\varepsilon] = \frac{k}{n} \sum_{i=k+1}^{n} \frac{1}{i-1} 
+\end{equation}
+Expressing this in terms of the Harmonic Number $H_n$.
+\begin{equation}
+P[\varepsilon] = \frac{k}{n} \left( \sum_{i=1}^{n-1} \frac{1}{i} - \sum_{i=1}^{k-1} \frac{1}{i} \right)    
+\end{equation}
+\begin{equation}
+P[\varepsilon]  = \frac{k}{n} \left( H_{n-1} - H_{k-1} \right)
+\end{equation}
+We know that $H_x \approx ln x + \gamma $ where $\gamma$ is the Euler- Mascheroni Constant. \\
+\begin{eqnarray}
+P[\varepsilon]  = \frac{k}{n} \left( ln (n-1)  - ln(k-1)  \right) \\
+P[\varepsilon]  = \frac{k}{n} \left( ln (\frac{n-1}{k-1})  \right)
+\end{eqnarray}
+Which is the required answer for part (i). \\
+
+Now to find the value for which the probability is maximum we differentiate, we first express 
+\begin{eqnarray}
+P[\varepsilon]  \leq \frac{k}{n}  ln \left( \frac{n}{k}  \right)
+\end{eqnarray}
+Differentiating this $w.r.t k$ we get 
+\begin{eqnarray}
+\frac{\partial}{\partial k} \left( \frac{k}{n} \: ln\left( \frac {n}{k} \right) \right)  = \frac{1}{n} \left( ln\left( \frac {n}{k} \right) - 1 \right) = 0
+\end{eqnarray}
+Since we know that $n$ is finite then maximizing this 
+\begin{eqnarray}
+ ln\left( \frac {n}{k} \right) = 1
+\end{eqnarray}
+
+\begin{eqnarray}
+ \frac {n}{k} = e
+\end{eqnarray}
+
+\begin{eqnarray}
+ k=\frac {n}{e} 
+\end{eqnarray}
+
+Now substituting for this value of $k$ we get 
+
+\begin{eqnarray}
+P[\varepsilon]  \leq \frac{1}{e} 
+\end{eqnarray}
+
+ 
+\end{answer}
+
+\end{problem}
+
+
+\pbitem
+
+\begin{problem}
+
+\textbf{Randomization in Error Rectification}
+
+\begin{answer}
+
+The algorithm we define is as follows, 
+
+\begin{enumerate}
+ \item Pick a number uniformly and randomly from $0$ to $n-1$ let this be $x$. 
+\item  Now we compute $y = (z-x)$ $mod$ $n $. This gives us two random variables $x$ and $y$ such that $(x +y) mod n = z$. 
+\item Substituting this value for $z$, we get $F((x+y)$ $mod$ $n)=(F(x) + F(y))mod m$. So now we do not have to find $F(z)$,but instead we find 
+$F(z)=(F(x) + F(y))$ $mod$ $m$ . This completes our algorithm. 
+\end{enumerate}
+
+We shall now analyze the probability of $F(z)$ being corrupt
+
+Since $x$ is a uniformly and randomly picked number
+\begin {eqnarray}
+ P[F(x)\textrm{ has been corrupted }] = \frac{1}{5} \\
+ P[F(x)\textrm{ has not been corrupted }] = \frac{4}{5}
+\end {eqnarray}
+We see that since $x$ is a uniformly random variable, $y$ can also be any of the numbers uniformly (but not randomly). We can see that here we do not require randomness, but the possibility that all values of $y$ are equally possible, this means that adversary will NOT be able to change certain numbers alone, and give a failure probability greater than the fraction of table entries corrupted, This enables us to say that the distribution of $F(y)$ will not change with the change according to the value  $z$ chosen and hence
+\begin {eqnarray}
+ P[F(y)\textrm{ has been corrupted }] = \frac{1}{5} \\
+ P[F(y)\textrm{ has not been corrupted }] = \frac{4}{5}
+\end {eqnarray}
+Since we find that we cannot argue the independence of the random variables. We shall use Union Theorem. $F(z)$ is corrupted if either $F(x)$ or $F(y)$ is corrupted.
+\begin {eqnarray}
+ P[F(z)\textrm{ has been corrupted }] \leq & P[F(x)\textrm{ has been corrupted }] + \\
+ & P[F(y)\textrm{ has been corrupted }] \nonumber \\
+\end {eqnarray}
+\begin{eqnarray}
+P[F(z) \textrm{ corrupted}]  & \leq & \frac{2}{5} \\
+P[F(z) \textrm{ is correct}] & \geq & \frac{3}{5}
+\end{eqnarray}
+
+
+This completes our answer to part (i) of the problem. \\
+
+For the second part, we run the same algorithm three times, and take the value than has been repeated most number of times, if no value has been repeated, then we output the first value. \\  
+
+We check the following probabilities. \\
+
+Probability that all three values of $F(z)$ are correct =
+
+\begin{eqnarray}
+P[\textrm{All 3 correct} ]  \geq \left( \frac{3}{5} \right) ^3 = \frac{27}{125}  
+\end{eqnarray}
+
+Since all three runs of the algorithm are independent of each other we have been able to apply the product rule. 
+
+Probability that any two values of $F(z)$ are correct =
+
+\begin{eqnarray}
+P[\textrm{Some 2 correct} ]  \geq {3 \choose 2} \left( \frac{3}{5} \right) ^2 \left( \frac{2}{5} \right)  = \frac{54}{125}  
+\end{eqnarray}
+
+Probability that the first value is correct and the rest two are wrong. 
+
+\begin{eqnarray}
+P[\textrm{Some 2 correct} ] \geq  \left( \frac{3}{5} \right)  \left( \frac{2}{5} \right) ^2  = \frac{12}{125} 
+\end{eqnarray}
+
+We can see that the following is a partition of the probable cases and hence if we are allowed to repeat our algorithm 3 times with independent values of $x$ each time, then the total success probability. 
+
+\begin{eqnarray}
+ P[F^{(3)}(z) \textrm{ is correct }] &  \geq & \frac{27}{125} + \frac{54}{125}  + \frac{12}{125} = \frac{93}{125} \\
+ & \geq & 0.744
+\end{eqnarray}
+
+\end{answer}
+
+
+\end{problem}
+
+\pbitem
+\begin{problem}
+
+\textbf{Set Balancing} 
+
+\begin{answer}
+We shall first look at a single entry. Let $A_{ij}$ be the element at the $i^{th}$ row and $j^{th}$ column of the matrix $A$. We also define $Ab_i$ as the $i^{th}$ value of the column vector $Ab$.
+
+Proving that $\|Ab\|_{\infty}$ is of order $O(\sqrt{n log n})$ is equivalent to proving that
+\begin{eqnarray}
+\|Ab\|_{\infty} \leq C \sqrt{n log n} 
+\end{eqnarray}
+
+for some finite $C$ with very high probability. \\
+
+\newtheorem{lemsetbal}{Lemma}
+\begin{lemsetbal}
+$|Ab_i| \leq c \sqrt{n log n}$ with very high probability where $Ab_i$ is the $i^{th}$ value of the Column Vector $Ab$.     
+\end{lemsetbal}
+\begin{proof}
+We can write $Ab_i$ as 
+\begin{eqnarray}
+ Ab_i = \sum_{j=1}^n A_{ij} b_j
+\end{eqnarray}
+Where $A_{ij}$ is from the set $\{0,1\}$ and $b_j$ is randomly picked from $\{-1,+1\}$\\
+It is very easy now to see the connection with the random walk problem. \\
+In short we can see that if $A_{ij} = 0$ then it has no effect to the sum, this can be seen as equivalent to "not moving" in a step in the random walk. We shall now reorder the sum in such a way that all the 0's occur at the end, since $b_i$ is uniformly random this will not change the problem. Let us assume, 
+\begin{eqnarray}
+m= \sum_{j=1}^n A_{ij}
+\end{eqnarray}
+This will count the total number of non-zero entries in the row, now we can see that this problem is equivalent to the random walk problem. \\
+We shall now define a new row $A`_i$ of size $m$ with all zero entries removed, and $B$ with all the entries in the same index as the zero entries of $A_i$ removed. 
+
+Now let us define a random variable 
+\begin{eqnarray}
+Y_i = \{1 \textrm{ if } B_i = +1 &  , 0  \textrm{ if } B_i = -1\}
+\end{eqnarray}
+
+Expected value of $Y=\sum Y_i$
+
+\begin{eqnarray}
+E[Y] = \frac{m}{2}
+\end{eqnarray}
+
+We can see that $Y$ is the result of a series of bernouli trials and hence we can apply Chernoff bound on this. \\
+
+We need to prove that 
+\begin{eqnarray}
+P [Y > (1+ \delta) \frac{m}{2}] \leq \frac{1}{m^c}
+\end{eqnarray}
+Applying Chernoff Bound, we get 
+\begin{eqnarray}
+e^{\frac{\mu \delta ^2}{2}} \leq \frac{1}{m^c} \\
+e^{\frac{m \delta ^2}{4}} \leq e^{c ln m} \\
+\frac{m \delta ^2}{4} \leq c \: ln m\\
+\end{eqnarray}
+Now we find the value of $\delta$ that will make this valid.
+\begin{eqnarray}
+\delta = \sqrt{\frac{4 c \: ln \:m}{m}}
+\end{eqnarray}
+Applying this value for $\delta$ we also set $c=2$ get 
+
+\begin{eqnarray}
+P [Y > (1+ \sqrt{\frac{8 \:ln \: m}{m}}) \frac{m}{2}] \leq \frac{1}{m^2}
+\end{eqnarray}
+Rewriting
+\begin{eqnarray}
+P [(Y - \frac{m}{2}) > \sqrt{8m \:ln \: m})  \leq \frac{1}{m^2}
+\end{eqnarray}
+From this we can get
+\begin{equation}
+ P[Ab_i>\sqrt{8m \:ln \: m}] \leq \frac{1}{m^2}
+\end{equation}
+Now $m$ was the number of non-zero entries in the row and setting $E[m]=\frac{n}{2}$
+\begin{equation}
+ P[Ab_i>2\sqrt{n \:ln \: n}] \leq \frac{4}{n^2}
+\end{equation}
+And hence we say $|Ab_i| \leq c nlogn$ with very high probability.
+\end{proof}
+ 
+Now we apply union theorem on the result, and hence 
+
+ \begin{eqnarray}
+ P[Max(Ab_i)>2\sqrt{n \:ln \: n}] \leq n \frac{4}{n^2} \\
+ P[Max(Ab_i)>2\sqrt{n \:ln \: n}] \leq  \frac{4}{n}
+\end{eqnarray}
+
+Hence we can say that $\|Ab\|_\infty = O(\sqrt{n log n})$ with very high probability 
+
+
+\end{answer}
+
+\end{problem}
+
+
+\end{problemlist}
+
+\end{document}
