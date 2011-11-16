@@ -1,0 +1,213 @@
+pristine:bfcda96ec339d9e329bad068d563740ce2b8bc7b6440653078d85593c8651a83
+Starting with inventory:
+0000008411-d2f24f53c0b217fa0cd6903559e355f2c08c1e58be087a582959c9affc4f8b74
+[TAG Version 0.4
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110726074200
+ Ignore-this: 26eae12ae65f6ba51a4489c5ffc4b56b
+] 
+hash: 0000001770-5f4f003b3423f4999c7d94de611f9a0c4d48f246ad524a0adfe0906ee7e2fe34
+[setting up the relevant variables
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110724125438
+ Ignore-this: a05e61bcecacd4e8091dfaad84338a5f
+] 
+hash: 0000000355-d3744dcbd2564cb5e5779a881353f4b18a21a5a7f7cffd9144e3d5d57b28cbac
+[added the single page view of the notes
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110725073415
+ Ignore-this: e5abbb20b46d5dab92935ecba2aefc44
+] 
+hash: 0000000649-99dca73f11d25e7ae6f4e6ba45c26f2eb8314e8cc337b24529da86b196d3cef1
+[added multi page view of the notes
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110725140424
+ Ignore-this: ae76128af3d1ce5bf94deabd9a8aa8cd
+] 
+hash: 0000001961-aed068a344474a0cb9ab200443ab88e1fb42141d87a4fecddac768ec7f64b093
+[added the introductory lecture
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110726051252
+ Ignore-this: 4f932da660b33ed3eccb8865a8da2816
+] 
+hash: 0000002839-2c9ec1e5486591c57e9d1044c9bb7506bfc3b7dbf0697fbe831dfdaa8a4d330f
+[used book format instead of article format
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110726074404
+ Ignore-this: cd0e80c597606ea729a4c08dabe2bc3b
+] 
+hash: 0000000247-bdb6e70a2c8376e979e42f5c2b20c21da3462115c2ffa8ebd76b5d3278038592
+[added the second lecture
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110726122415
+ Ignore-this: d1e40245e6c656852b9b8eb72aef8122
+] 
+hash: 0000007026-d51f9e4343147d51cf990fd84ab3fbee2f95276e8b6e8f9529509cf3a6240190
+[rewording the main link
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110726122904
+ Ignore-this: 46107f5a978a213ddbb8d49f9c19b022
+] 
+hash: 0000000247-b753415721f15dce6929fbb628816f8acd627659beec20a782c41e0127ef20f4
+[corrected the destination
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110726123714
+ Ignore-this: 994dc49a9fef45c762504225306c3e97
+] 
+hash: 0000000314-cefd83ce9ed0f138fa2a1bf9e1154518a29e4e0af235d88e2d7105b6d29864b1
+[some typos
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110727055945
+ Ignore-this: 313073e83a81904c4acb2c175c9796e0
+] 
+hash: 0000002100-261af15418a0b2d51b817b7d38672b756ab058697df88cae06b8cfffee58e63a
+[BUGFIX: now literate haskell source is also exported
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110727060347
+ Ignore-this: 207cd3129c6ff11bc01eb22516d8ac57
+] 
+hash: 0000000306-c4f4f0be94888571d113546d20e08f485028862c68516f9a9ac188ea28b67641
+[Fixed some grammatical errors
+Pankaj More <pankajm@cse.iitk.ac.in>**20110728111548
+ Ignore-this: a2b4d19a10947b49311447e63aef1753
+] 
+hash: 0000000706-b1006dd975b5427c9e148bbb1472cf1c9e32eaae57f2f45e67234029a701a2e2
+[now latex sections are numbered
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110729122128
+ Ignore-this: f11fa1ec7a0355ce030a80c0883411f1
+] 
+hash: 0000000235-466a69e3df21f6d80dfd05bb63847738662a524462699737a3bdd685cf3e3f22
+[lecture 3: more on pattern matching added
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110730075109
+ Ignore-this: 9df12cd92bffdcb7386e583fc4e84250
+] 
+hash: 0000005911-a1791335ef2a0f49062e16f7006e6c38d2f79defba5ada3571686ddaba6d2884
+[link to abstract nonsense added
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110803111222
+ Ignore-this: 3031640e9f8dc2697a18adc02023b9d0
+] 
+hash: 0000000284-eccff856edc9d4eb6f7e3c069b378cf3f40985c4ce13438bf3eeb387ae15b934
+[BUGFIX: latex template now includes ctable package.
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110806060211
+ Ignore-this: c95772561f00a4ae5c64aad07064db26
+] 
+hash: 0000000276-5873294c3a68a9354055b078f37a77cc13cecd6444decd66c1938afdb154751f
+[BUGFIX: fixing the generated literate haskell for the lecture 2
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110806081017
+ Ignore-this: 4af58c98cac5a0d8baa82007722eb52
+] 
+hash: 0000000732-7e9b5e67b7368cde18e21cf92b7cc3814308bd85d752bdb2df1593c3e99914e5
+[lecture 4: sieve of eratosthenes
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110809044334
+ Ignore-this: 56495816f48784d8a26baf1b6dbc8b63
+] 
+hash: 0000006812-059c2f76ecfffb39b2ed3085607c1921c7c3ab9f7ebb150103a33a2bebe3e2c3
+[reindenting makefile
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110809044529
+ Ignore-this: 700305afe6e30beeda6565d817a4d7e8
+] 
+hash: 0000000458-311cf262b4417d94d86172b6d3e6b893da12411670c0a78b538be3e387806d28
+[skeleton lecture 5 added
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110809044734
+ Ignore-this: 669719df0ffefa1b768401930441973
+] 
+hash: 0000000578-0970b05069becc807b2261d595a57c95703a28f07255ecab1c982426072ac800
+[skeleton lecture 6 added
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110809044850
+ Ignore-this: 91c2e10fb6669bd4b4ee884e62f8f556
+] 
+hash: 0000000595-ca3f7259058d630a88c50d2a74e463fb5c737211b9e0fb6dd5e2953e75f4d618
+[BUGFIX: literate haskell generation in lecture 3
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110809045030
+ Ignore-this: a49c8c4749a897eba4809bcddadf0a10
+] 
+hash: 0000001590-29fa71308fab89e047bb08a01bfd8fe0fdeb739b57c278f6e4953ab138e68b1d
+[added lecture 7
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110809055708
+ Ignore-this: 3e5a0271d80f48c7e2b9a60453a2fab1
+] 
+hash: 0000004451-caf73687b5fcbcbd007a8fefdb6b06a749b9160e7f3e51dcc30be75f34020560
+[typos in the Sieve lecture fixed
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110809055549
+ Ignore-this: 5d7f751d76a3bb978577482d3c475d54
+] 
+hash: 0000002487-315652d2c3311f7407509535fb096a16bdf1c694dbb34949012c76fe0adcad03
+[lecture 9 added
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110811100106
+ Ignore-this: d7c9dd73b87e478bec646a08b348c597
+] 
+hash: 0000004852-6cdd5398bdb4017d2ac03ee3c842a4c2af20025b31da251eab40b25230c75657
+[BUGFIX: an error in the divOp definition
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110812091735
+ Ignore-this: 3de29be8010db651499f51814012d6db
+] 
+hash: 0000000332-d6292364a8802fa89e94ed02d5e1981f0fc0150a917a2514225c69cf2959a7e6
+[realigned using spaces instead of tabs
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110812092018
+ Ignore-this: 166a8e35e951e86049a7ae10076ce197
+] 
+hash: 0000000248-78f17a8246250d645439dca7d2e7e089cb4e6df2c03e6ad227eb4134c05ce0e6
+[added the lecture on Fibonacci series
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110818063645
+ Ignore-this: e3e9526c49d98127df38eab2503ed02a
+] 
+hash: 0000001600-c3a2175de77c32f8936efd7b80366d51e77917b7b9a066177a9e673d804e2464
+[lecture on lambda calculus include
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110821102221
+ Ignore-this: d2604e8ef1885cc3a2f705ac91964f88
+] 
+hash: 0000008639-c752b76f2c19a4a5fee374a9f217c41941781f9f409294000e10b5790af08b22
+[corrected the lecture number of data types lecture
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110821105127
+ Ignore-this: 7a546dfd95de175ea4cc4ddf8f82cfe3
+] 
+hash: 0000000242-e7b0f03526f336bad6683b25be21b384c6e585c7d89a7e0ec5dae3d2027baa61
+[skeleton chapter on modules added
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110821105310
+ Ignore-this: 28e19ad2d14fb87190a789e3085780fd
+] 
+hash: 0000000327-1f38d4eb6b505a468c3072623e2a2558978d6658e6a66029d687902ece2f79d4
+[skeleton chapter on type inference added
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110821105330
+ Ignore-this: 8c6a65580517bb6bea9e2a3120bb533a
+] 
+hash: 0000000379-c54107c99906e244d3b90a6e2d84ec5113c82f47e03eff711377acdbbb2d5385
+[fixed some typos in the lambda calculus lecture
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110821105926
+ Ignore-this: 3f0e9d4d8a87a64c1c58b711e3563566
+] 
+hash: 0000001646-eddae215586de0ea7777539c531582551a1b64453a1289cd8ec9792468a8a8bc
+[minor typos fixed
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110823055321
+ Ignore-this: 8b5123b9fc67aa6c04124701d909042e
+] 
+hash: 0000000582-493e70f7f1ff27950dc35185a1281637aab0e54529d0e116e6ae73600465c499
+[first lecture on type inference added
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110825124224
+ Ignore-this: a7c4cbc46c590ecf6ce465cd61de3f45
+] 
+hash: 0000008933-4ff72877b9ea0b09b425ed4de58cc3f5cfad74dfbbe9a4d72062849ff9391cda
+[added a sample list of projects
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110826061818
+ Ignore-this: f34a577ba530b27583e00fedf7f276ab
+] 
+hash: 0000004638-1d8f00b2397117ff61ceb9aaebaf42c7dffeecc6a0a4a959445a66b9165321fd
+[added OpenID project
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110826111942
+ Ignore-this: 27501717713827a42f9eddb086878a6a
+] 
+hash: 0000000242-eb14134c5791ae093aecfb5a707442402f0606c49ea877d01323c5223d252d43
+[added M4 project.
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110827062915
+ Ignore-this: f1452357bd60e0bca5b9a8e06a8446c2
+] 
+hash: 0000001018-852540fc191f305b24e1bd32f2414a94ff811d719017dc0ece898a9772a0c2a7
+[added symbolic integration as a project
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110827063227
+ Ignore-this: d5c71e92ab1c2a8ebae6838737c79b03
+] 
+hash: 0000000435-9dc8837d2756b7761ab0ad7de5f0ac1e3496f535a40e07d01128edaf73f0e48d
+[derived some useful type classes.
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110827120731
+ Ignore-this: a9ef107076e66048d2c87e9a29a9665c
+] 
+hash: 0000000354-48a22d945867cf1d3cfd853119cd892c0d15ee7429f325dd765e3a3ef1dcdb07
+[unification algorithm added
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110827120740
+ Ignore-this: cd740c59349b39f7e8bf3feec9d349ac
+] 
+hash: 0000010217-daf6f37e0af83572429cf69e33a74b86fa308042774e033d420ba12ae80ad16f
+[added a project into the list of projects chosen
+Piyush P Kurur <ppk@cse.iitk.ac.in>**20110828063843
+ Ignore-this: c5c092645e332f6562a345362e266664
+] 
+hash: 0000002027-cbaebf9130d54e17481d3498cfd01b59072b7fba05f9cc9464a8318dab0b6288

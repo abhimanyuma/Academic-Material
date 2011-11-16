@@ -1,0 +1,24 @@
+# Edit this file to configure. The syntax is that of a GNUMakefile
+
+SOURCE=src
+
+# Where the webpages are located. We assume the following about the
+# directory.
+#
+#     1. The command make -C ${SOURCE} all will build all relevant files
+#        there.
+#
+#     2. The file ${SOURCE}/.files contains exactly the files
+#        to be transfered to the actual homepage.
+#
+#     3. The command make -C ${SOURCE} clean will clean up stuff.
+#
+
+
+# Where to sync the pages to. Assumed to be an rsync url
+
+DESTINATION=ppk@turing.cse.iitk.ac.in:/homepages/global/ppk/teaching/cs653/notes
+
+# The base url of you homepage.
+
+BASE_URL=http://www.cse.iitk.ac.in/users/ppk/teaching/cs653
